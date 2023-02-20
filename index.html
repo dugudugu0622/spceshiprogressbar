@@ -1,0 +1,74 @@
+<div class="clock">
+  <div class="hour-hand"></div>
+  <div class="minute-hand"></div>
+  <div class="second-hand"></div>
+  <div class="center-circle"></div>
+</div>
+
+<style>
+  .clock {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #f6f6f6;
+  position: relative;
+}
+
+.hour-hand, .minute-hand, .second-hand {
+  width: 2px;
+  height: 60px;
+  background-color: #000;
+  position: absolute;
+  left: 50%;
+  transform-origin: bottom center;
+  transform: rotate(90deg);
+}
+
+.hour-hand {
+  height: 40px;
+  background-color: #000;
+  transform: rotate(90deg);
+}
+
+.minute-hand {
+  height: 55px;
+  background-color: #000;
+  transform: rotate(90deg);
+}
+
+.second-hand {
+  height: 60px;
+  background-color: red;
+  transform: rotate(90deg);
+}
+
+.center-circle {
+  width: 10px;
+  height: 10px;
+  background-color: #000;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
+<script>
+  function setClock() {
+  let date = new Date();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let seconds = date.getSeconds();
+  let hourDeg = (hours / 12) * 360 + (minutes / 60) * 30 - 90;
+  let minuteDeg = (minutes / 60) * 360 + (seconds / 60) * 6 - 90;
+  let secondDeg = (seconds / 60) * 360 - 90;
+  document.querySelector(".hour-hand").style.transform =
+    "rotate(" + hourDeg + "deg)";
+  document.querySelector(".minute-hand").style.transform =
+    "rotate(" + minuteDeg + "deg)";
+  document.querySelector(".second-hand").style.transform =
+    "rotate(" + secondDeg + "deg)";
+}
+
+setInterval(setClock, 1000);
+</script>
